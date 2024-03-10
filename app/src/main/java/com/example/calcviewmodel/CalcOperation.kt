@@ -5,5 +5,4 @@ sealed class CalcOperation(val symbol: String) {
     object Subtract: CalcOperation("-")
     object Multiply: CalcOperation("*")
     object Divide: CalcOperation("/")
-    object Percent: CalcOperation("%")
 }

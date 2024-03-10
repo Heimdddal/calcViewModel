@@ -1,6 +1,5 @@
-package com.example.calcviewmodel.ui.theme
+package com.example.calcviewmodel
 
-import androidx.compose.foundation.MarqueeSpacing
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -12,19 +11,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.AbsoluteAlignment
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.calcviewmodel.CalcAction
-import com.example.calcviewmodel.CalcButton
-import com.example.calcviewmodel.CalcData
-import com.example.calcviewmodel.CalcOperation
+import com.example.calcviewmodel.ui.theme.Colors
 
 val RowModifier = Modifier
     .fillMaxWidth()
@@ -40,6 +34,7 @@ fun CalcButtonLayout(
     Box(
         modifier = Modifier
             .fillMaxSize()
+            .then(modifier)
     ) {
         Column(
             modifier = Modifier
@@ -49,13 +44,13 @@ fun CalcButtonLayout(
             verticalArrangement = Arrangement.spacedBy(rowSpacing)
         ) {
             Text(
-                text = state.number1 + (state.operation ?: "") + state.number2,
+                text = state.number1 + (state.operation?.symbol ?: "") + state.number2,
                 textAlign = TextAlign.End,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 32.dp),
-                fontWeight = FontWeight.SemiBold,
-                fontSize = 80.sp,
+                fontWeight = FontWeight.Light,
+                fontSize = 72.sp,
                 color = Colors.outputWhite,
                 maxLines = 2
             )
@@ -88,7 +83,7 @@ fun CalcButtonLayout(
                         .aspectRatio(1F)
                         .weight(1F),
                     onClick = {
-                        onAction(CalcAction.operation(CalcOperation.Divide))
+                        onAction(CalcAction.Operation(CalcOperation.Divide))
                     })
             }
             Row (
@@ -129,7 +124,7 @@ fun CalcButtonLayout(
                         .aspectRatio(1F)
                         .weight(1F),
                     onClick = {
-                        onAction(CalcAction.operation(CalcOperation.Multiply))
+                        onAction(CalcAction.Operation(CalcOperation.Multiply))
                     })
             }
             Row (
@@ -170,7 +165,7 @@ fun CalcButtonLayout(
                         .aspectRatio(1F)
                         .weight(1F),
                     onClick = {
-                        onAction(CalcAction.operation(CalcOperation.Subtract))
+                        onAction(CalcAction.Operation(CalcOperation.Subtract))
                     })
             }
             Row (
@@ -211,7 +206,7 @@ fun CalcButtonLayout(
                         .aspectRatio(1F)
                         .weight(1F),
                     onClick = {
-                        onAction(CalcAction.operation(CalcOperation.Add))
+                        onAction(CalcAction.Operation(CalcOperation.Add))
                     })
             }
             Row (
@@ -219,13 +214,13 @@ fun CalcButtonLayout(
                 horizontalArrangement = Arrangement.spacedBy(buttonSpacing)
             ){
                 CalcButton(
-                    symbol = "+",
+                    symbol = "%",
                     modifier = Modifier
                         .background(Colors.lightGray)
                         .aspectRatio(1F)
                         .weight(1F),
                     onClick = {
-                        onAction(CalcAction.operation(CalcOperation.Percent))
+                        onAction(CalcAction.Percent)
                     })
                 CalcButton(
                     symbol = "0",
